@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solar Repair Services — Your personal solar guardian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A2A4E; --deeper:#08233F; --surface:#10355E; --midblue:#1C4A7A;
+  --gold:#F5A623; --cream:#F7F3E8; --blue:#A9C8E4;
+  --ink:#0A2A4E;
+  --maxw:1180px;
+  --r:18px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Mulish',system-ui,sans-serif;
+  background:var(--navy); color:var(--cream);
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,.disp{font-family:'Fraunces',Georgia,serif; line-height:1.08; letter-spacing:-.01em;}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.eyebrow{font-family:'Mulish';font-weight:800;letter-spacing:.28em;text-transform:uppercase;font-size:.72rem;color:var(--gold)}
+.muted{color:var(--blue)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:.55em;font-family:'Mulish';font-weight:800;
+  font-size:1rem;padding:1rem 1.7rem;border-radius:999px;cursor:pointer;border:0;transition:.35s var(--ease);position:relative}
+.btn-gold{background:var(--gold);color:var(--navy);box-shadow:0 10px 30px -8px rgba(245,166,35,.55)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 18px 44px -10px rgba(245,166,35,.7)}
+.btn-ghost{background:transparent;color:var(--cream);border:1.5px solid rgba(169,200,228,.4)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.link-quiet{font-weight:700;color:var(--blue);display:inline-flex;align-items:center;gap:.4em;transition:.3s}
+.link-quiet:hover{color:var(--cream);gap:.7em}
+.link-quiet svg{transition:.3s}
+.link-quiet:hover svg{transform:translateX(4px)}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);
+  background:rgba(8,35,63,.72);border-bottom:1px solid rgba(169,200,228,.12);transition:.4s}
+header.scrolled{background:rgba(8,35,63,.95)}
+.nav{display:flex;align-items:center;gap:2rem;height:78px}
+.logo{display:flex;align-items:center;gap:.6rem;height:44px}
+.logo svg{height:42px;width:auto}
+nav.links{margin-left:auto;display:flex;gap:2rem;align-items:center}
+nav.links a{font-weight:700;font-size:.95rem;color:var(--cream);opacity:.82;position:relative;padding:.2em 0}
+nav.links a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--gold);transition:.3s var(--ease)}
+nav.links a:hover{opacity:1}
+nav.links a:hover::after{width:100%}
+.hd-cta{margin-left:.5rem}
+.burger{display:none;margin-left:auto;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
+.burger span{width:26px;height:2.5px;background:var(--cream);border-radius:2px;transition:.3s}
+
+/* ---------- shield mark + sparkle ---------- */
+.shield{position:relative;display:inline-block}
+.shield svg{display:block;position:relative;z-index:2;filter:drop-shadow(0 8px 28px rgba(0,0,0,.4))}
+.shield .glow{position:absolute;inset:-22%;z-index:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,166,35,.42),rgba(245,166,35,0) 65%);
+  filter:blur(8px);animation:breathe 4.5s var(--ease) infinite}
+@keyframes breathe{0%,100%{opacity:.55;transform:scale(.92)}50%{opacity:1;transform:scale(1.08)}}
+.spark{position:absolute;z-index:3;pointer-events:none;color:var(--cream)}
+.spark svg{filter:drop-shadow(0 0 6px rgba(247,243,232,.9))}
+.spark.s1{top:6%;left:8%;animation:tw 2.4s ease-in-out infinite}
+.spark.s2{top:18%;right:4%;animation:tw 2.9s ease-in-out .6s infinite}
+.spark.s3{bottom:24%;left:-2%;animation:tw 2.1s ease-in-out 1.1s infinite}
+.spark.s4{top:46%;right:-3%;animation:tw 3.3s ease-in-out .3s infinite;color:var(--gold)}
+.spark.s5{bottom:6%;right:24%;animation:tw 2.6s ease-in-out 1.5s infinite;color:var(--gold)}
+@keyframes tw{0%,100%{opacity:0;transform:scale(.3) rotate(0deg)}45%{opacity:1;transform:scale(1) rotate(35deg)}}
+/* sweeping glint over shield */
+.shield .glint{position:absolute;inset:0;z-index:4;overflow:hidden;border-radius:40px;pointer-events:none;
+  -webkit-mask:url(#shieldmaskA);mask:url(#shieldmaskA)}
+.shield .glint::after{content:"";position:absolute;top:-60%;left:-120%;width:60%;height:220%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.85),transparent);
+  transform:rotate(18deg);animation:sweep 4.8s var(--ease) infinite}
+@keyframes sweep{0%{left:-120%}28%{left:160%}100%{left:160%}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden}
+.hero-photo{position:absolute;inset:0;z-index:0}
+.hero-photo img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);animation:kenburns 18s ease-out forwards}
+@keyframes kenburns{to{transform:scale(1)}}
+.hero-scrim{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(8,35,63,.96) 0%,rgba(10,42,78,.86) 42%,rgba(10,42,78,.45) 75%,rgba(10,42,78,.2) 100%),
+             radial-gradient(120% 90% at 0% 50%,rgba(8,35,63,.5),transparent)}
+.hero-arc{position:absolute;z-index:1;right:-12%;top:50%;transform:translateY(-50%);width:780px;height:780px;
+  border-radius:50%;border:1px solid rgba(245,166,35,.18);
+  box-shadow:0 0 0 60px rgba(245,166,35,.05),0 0 0 140px rgba(169,200,228,.04);
+  animation:spin 60s linear infinite}
+@keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
+.hero-inner{position:relative;z-index:2;padding:5rem 0}
+.hero .shield{margin-bottom:1.6rem}
+.hero .shield svg{height:96px}
+.hero h1{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:600;max-width:13ch;margin:.5rem 0 1.3rem}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .sub{font-size:clamp(1.05rem,1.6vw,1.32rem);max-width:42ch;color:#e9e4d6;margin-bottom:2rem;line-height:1.55}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:2.4rem}
+.trust-strip{display:flex;gap:1.2rem;flex-wrap:wrap;font-weight:700;font-size:.88rem;color:var(--blue);align-items:center}
+.trust-strip .dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+[data-d="1"]{transition-delay:.08s}[data-d="2"]{transition-delay:.16s}[data-d="3"]{transition-delay:.24s}[data-d="4"]{transition-delay:.32s}
+
+/* ---------- sections ---------- */
+section{position:relative}
+.band{padding:7rem 0}
+.center{text-align:center}
+.kicker{margin-bottom:1rem}
+h2.title{font-size:clamp(2rem,4vw,3.1rem);font-weight:600;margin-bottom:1.1rem}
+.lead{font-size:1.2rem;color:#ded8c8;max-width:60ch;line-height:1.7}
+.center .lead{margin:0 auto}
+
+/* problem */
+.problem{background:var(--deeper);text-align:center}
+.problem .icon-ring{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;margin:0 auto 1.8rem;
+  border:1.5px solid rgba(245,166,35,.4);background:radial-gradient(circle,rgba(245,166,35,.12),transparent)}
+.problem .lead{margin:1.4rem auto 0}
+
+/* what we do */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:3rem}
+.card{background:var(--surface);border:1px solid rgba(169,200,228,.12);border-radius:var(--r);padding:2.1rem 1.6rem;
+  transition:.4s var(--ease);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:.45s var(--ease)}
+.card:hover{transform:translateY(-8px);border-color:rgba(245,166,35,.4);box-shadow:0 24px 50px -20px rgba(0,0,0,.6)}
+.card:hover::before{transform:scaleX(1)}
+.card .ico{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;margin-bottom:1.3rem;
+  background:rgba(245,166,35,.14);color:var(--gold)}
+.card h3{font-size:1.28rem;font-weight:600;margin-bottom:.55rem}
+.card p{font-size:.98rem;color:var(--blue)}
+
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3.4rem;position:relative}
+.stepline{position:absolute;top:30px;left:8%;right:8%;height:2px;background:linear-gradient(90deg,var(--gold),var(--blue));opacity:.35;z-index:0}
+.step{position:relative;z-index:1;padding:0 1.1rem;text-align:center}
+.step .num{width:60px;height:60px;border-radius:50%;margin:0 auto 1.3rem;display:grid;place-items:center;
+  font-family:'Fraunces';font-weight:600;font-size:1.5rem;color:var(--navy);background:var(--gold);
+  box-shadow:0 0 0 8px var(--navy),0 10px 24px -8px rgba(245,166,35,.6)}
+.step h3{font-size:1.1rem;font-weight:600;margin-bottom:.4rem}
+.step p{font-size:.92rem;color:var(--blue)}
+
+/* why us */
+.why{background:linear-gradient(160deg,var(--surface),var(--deeper))}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.why .shield svg{height:200px}
+.why-seals{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:2rem}
+.seal{border:1px solid rgba(169,200,228,.25);border-radius:999px;padding:.5rem 1.1rem;font-weight:700;font-size:.82rem;color:var(--blue);display:flex;gap:.5rem;align-items:center}
+.seal svg{color:var(--gold)}
+
+/* proof */
+.proof{background:var(--deeper);text-align:center}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin:3rem 0}
+.stat{background:var(--surface);border:1px solid rgba(169,200,228,.12);border-radius:var(--r);padding:2.4rem 1rem}
+.stat .big{font-family:'Fraunces';font-weight:600;font-size:clamp(2.6rem,5vw,3.6rem);color:var(--gold);line-height:1}
+.stat .lbl{margin-top:.6rem;color:var(--blue);font-weight:600;font-size:.95rem}
+.quote{max-width:62ch;margin:0 auto;background:var(--surface);border-left:3px solid var(--gold);border-radius:var(--r);
+  padding:2.2rem 2.4rem;text-align:left}
+.quote p{font-family:'Fraunces';font-style:italic;font-size:1.35rem;line-height:1.5;color:var(--cream)}
+.quote cite{display:block;margin-top:1rem;font-family:'Mulish';font-style:normal;font-weight:700;color:var(--gold);font-size:.95rem}
+
+/* plans */
+.plans-wrap{background:linear-gradient(180deg,var(--navy),var(--deeper))}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3.2rem;align-items:stretch}
+.plan{background:var(--surface);border:1px solid rgba(169,200,228,.16);border-radius:22px;padding:2.4rem 2rem;display:flex;flex-direction:column;transition:.4s var(--ease);position:relative}
+.plan:hover{transform:translateY(-6px)}
+.plan.pop{border:2px solid var(--gold);background:linear-gradient(180deg,var(--midblue),var(--surface));transform:scale(1.04)}
+.plan.pop:hover{transform:scale(1.04) translateY(-6px)}
+.plan .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:800;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.4rem 1rem;border-radius:999px}
+.plan .pname{font-family:'Fraunces';font-weight:600;font-size:1.5rem;margin-bottom:.3rem}
+.plan .price{font-size:1rem;color:var(--blue);margin-bottom:1.4rem}
+.plan .price b{font-family:'Fraunces';font-size:2.6rem;color:var(--cream);display:block;line-height:1}
+.plan ul{list-style:none;margin:0 0 1.8rem;display:grid;gap:.8rem}
+.plan li{display:flex;gap:.7rem;font-size:.95rem;color:#ded8c8;align-items:flex-start}
+.plan li svg{flex:none;margin-top:3px;color:var(--gold)}
+.plan .btn{margin-top:auto;width:100%;justify-content:center}
+.plan .btn-out{background:transparent;border:1.5px solid var(--gold);color:var(--gold)}
+.plan .btn-out:hover{background:var(--gold);color:var(--navy)}
+
+/* service areas */
+.areas{background:var(--deeper);text-align:center}
+.chips{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:2.2rem;max-width:780px;margin-left:auto;margin-right:auto}
+.chip{background:var(--surface);border:1px solid rgba(169,200,228,.18);border-radius:999px;padding:.7rem 1.3rem;font-weight:700;color:var(--cream);font-size:.92rem;transition:.3s}
+.chip:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+
+/* final cta */
+.final{background:radial-gradient(120% 140% at 50% 0%,var(--midblue),var(--navy));text-align:center;padding:7rem 0}
+.final .shield{margin-bottom:1.5rem}
+.final .shield svg{height:80px}
+.final h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:600;max-width:18ch;margin:0 auto 1rem}
+.final p{color:var(--blue);font-size:1.2rem;margin-bottom:2rem}
+
+/* footer */
+footer{background:var(--deeper);border-top:1px solid rgba(169,200,228,.12);padding:3.4rem 0 2rem;font-size:.9rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.4rem;align-items:start}
+.foot-grid .logo svg{height:50px}
+footer .trust{color:var(--blue);margin-top:1.1rem;line-height:1.9}
+footer .trust a{color:var(--gold);text-decoration:underline}
+.fcol h4{font-family:'Mulish';font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.74rem;color:var(--gold);margin-bottom:1rem}
+.fcol a{display:block;color:var(--blue);margin-bottom:.55rem;transition:.2s}
+.fcol a:hover{color:var(--cream)}
+.foot-bottom{border-top:1px solid rgba(169,200,228,.1);margin-top:2.4rem;padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;color:var(--blue)}
+.foot-bottom a{color:var(--blue);text-decoration:underline}
+.investor{color:var(--blue)} .investor a{color:var(--gold)}
+
+/* chatbot */
+.cbot-btn{position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:var(--gold);
+  border:0;cursor:pointer;z-index:90;display:grid;place-items:center;color:var(--navy);
+  box-shadow:0 14px 34px -8px rgba(245,166,35,.7);animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.cbot-btn:hover{transform:scale(1.08)}
+.cbot-panel{position:fixed;bottom:96px;right:24px;width:370px;max-width:calc(100vw - 32px);z-index:91;
+  background:var(--surface);border:1px solid rgba(245,166,35,.3);border-radius:22px;overflow:hidden;
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.7);transform:translateY(20px) scale(.96);opacity:0;pointer-events:none;transition:.4s var(--ease)}
+.cbot-panel.open{transform:none;opacity:1;pointer-events:auto}
+.cbot-head{background:linear-gradient(135deg,var(--midblue),var(--deeper));padding:1.2rem 1.3rem;display:flex;gap:.8rem;align-items:center}
+.cbot-head .ava{width:42px;height:42px;border-radius:50%;background:var(--gold);display:grid;place-items:center;color:var(--navy)}
+.cbot-head b{font-family:'Fraunces';font-weight:600;font-size:1.05rem}
+.cbot-head span{display:block;font-size:.78rem;color:var(--blue)}
+.cbot-body{padding:1.3rem;max-height:50vh;overflow:auto}
+.bubble{background:var(--deeper);border-radius:14px 14px 14px 4px;padding:.9rem 1.1rem;font-size:.95rem;color:var(--cream);margin-bottom:1rem}
+.cbot-form{display:grid;gap:.7rem}
+.cbot-form input,.cbot-form select,.cbot-form textarea{width:100%;background:var(--deeper);border:1px solid rgba(169,200,228,.2);
+  border-radius:11px;padding:.8rem .95rem;color:var(--cream);font-family:'Mulish';font-size:.92rem}
+.cbot-form input:focus,.cbot-form select:focus,.cbot-form textarea:focus{outline:none;border-color:var(--gold)}
+.cbot-form input::placeholder,.cbot-form textarea::placeholder{color:#7f93ac}
+.cbot-form .btn{justify-content:center;width:100%;margin-top:.3rem}
+.cbot-ok{text-align:center;padding:1.2rem .5rem}
+.cbot-ok .check{width:62px;height:62px;border-radius:50%;background:rgba(245,166,35,.15);display:grid;place-items:center;margin:0 auto 1rem;color:var(--gold)}
+.hidden{display:none}
+
+@media(max-width:980px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr);gap:2.5rem}.stepline{display:none}
+  .why-grid{grid-template-columns:1fr;gap:2.5rem}.why .shield{margin:0 auto;text-align:center}
+  .plans{grid-template-columns:1fr;gap:2rem}.plan.pop{transform:none}.plan.pop:hover{transform:translateY(-6px)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  nav.links{display:none}.burger{display:flex}.hd-cta{display:none}
+  nav.links.show{display:flex;position:absolute;top:78px;left:0;right:0;flex-direction:column;background:var(--deeper);padding:1.4rem 28px;gap:1.2rem;border-bottom:1px solid rgba(169,200,228,.15)}
+  .cards{grid-template-columns:1fr}.stats{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero{min-height:auto;padding:2rem 0 1rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .hero-photo img{transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- shared SVG defs for shield glint mask -->
+<svg width="0" height="0" style="position:absolute"><defs>
+<clipPath id="shieldmaskA" clipPathUnits="objectBoundingBox">
+<path d="M0.18,0.05 C0.3,0.02 0.4,0 0.5,0 C0.6,0 0.7,0.02 0.82,0.05 C0.95,0.09 1,0.13 1,0.3 L1,0.62 C1,0.85 0.7,0.97 0.5,1 C0.3,0.97 0,0.85 0,0.62 L0,0.3 C0,0.13 0.05,0.09 0.18,0.05 Z"/>
+</clipPath></defs></svg>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Solar Repair Services home">
+      <!-- full logo: mark + wordmark -->
+      <svg viewBox="0 0 249 254" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12.44 210.483C8.08 210.483 3.72 209.123 1.4 207.123L3.2 203.083C5.44 204.883 9 206.163 12.44 206.163C16.8 206.163 18.64 204.603 18.64 202.523C18.64 196.483 2 200.443 2 190.043C2 185.523 5.6 181.683 13.28 181.683C16.64 181.683 20.16 182.563 22.6 184.163L20.96 188.203C18.44 186.723 15.68 186.003 13.24 186.003C8.92 186.003 7.16 187.683 7.16 189.803C7.16 195.763 23.76 191.883 23.76 202.163C23.76 206.643 20.12 210.483 12.44 210.483ZM38.0363 210.363C31.4763 210.363 26.6763 205.803 26.6763 199.403C26.6763 193.003 31.4763 188.483 38.0363 188.483C44.6763 188.483 49.4363 193.003 49.4363 199.403C49.4363 205.803 44.6763 210.363 38.0363 210.363ZM38.0363 206.083C41.6763 206.083 44.3963 203.483 44.3963 199.403C44.3963 195.323 41.6763 192.723 38.0363 192.723C34.4363 192.723 31.7163 195.323 31.7163 199.403C31.7163 203.483 34.4363 206.083 38.0363 206.083ZM54.2175 210.083V180.403H59.2175V210.083H54.2175ZM73.94 188.483C80.1 188.483 83.66 191.403 83.66 197.563V210.083H78.94V207.483C77.74 209.323 75.42 210.363 72.22 210.363C67.34 210.363 64.26 207.683 64.26 203.963C64.26 200.403 66.66 197.603 73.14 197.603H78.66V197.283C78.66 194.363 76.9 192.643 73.34 192.643C70.94 192.643 68.46 193.443 66.86 194.763L64.9 191.123C67.18 189.363 70.5 188.483 73.94 188.483ZM73.26 206.723C75.7 206.723 77.82 205.603 78.66 203.403V200.923H73.5C70.1 200.923 69.18 202.203 69.18 203.763C69.18 205.563 70.7 206.723 73.26 206.723ZM94.8369 191.843C96.2769 189.603 98.8769 188.483 102.437 188.483V193.243C101.997 193.163 101.637 193.123 101.277 193.123C97.4769 193.123 95.0769 195.363 95.0769 199.723V210.083H90.0769V188.723H94.8369V191.843ZM142.328 210.083H136.728L131.008 201.883C130.648 201.923 130.288 201.923 129.928 201.923H123.608V210.083H118.408V182.083H129.928C137.288 182.083 141.848 185.843 141.848 192.043C141.848 196.283 139.688 199.403 135.888 200.883L142.328 210.083ZM136.608 192.043C136.608 188.523 134.248 186.483 129.688 186.483H123.608V197.643H129.688C134.248 197.643 136.608 195.563 136.608 192.043ZM167.266 199.523C167.266 199.923 167.226 200.523 167.186 201.003H150.426C151.026 204.123 153.626 206.123 157.346 206.123C159.746 206.123 161.626 205.363 163.146 203.803L165.826 206.883C163.906 209.163 160.906 210.363 157.226 210.363C150.066 210.363 145.426 205.763 145.426 199.403C145.426 193.043 150.106 188.483 156.466 188.483C162.706 188.483 167.266 192.843 167.266 199.523ZM156.466 192.483C153.226 192.483 150.866 194.563 150.386 197.683H162.506C162.106 194.603 159.746 192.483 156.466 192.483ZM183.909 188.483C190.149 188.483 194.749 192.803 194.749 199.403C194.749 206.043 190.149 210.363 183.909 210.363C181.189 210.363 178.789 209.443 177.069 207.483V217.843H172.069V188.723H176.829V191.523C178.509 189.483 180.989 188.483 183.909 188.483ZM183.349 206.083C186.949 206.083 189.669 203.483 189.669 199.403C189.669 195.323 186.949 192.723 183.349 192.723C179.749 192.723 176.989 195.323 176.989 199.403C176.989 203.483 179.749 206.083 183.349 206.083ZM207.378 188.483C213.538 188.483 217.098 191.403 217.098 197.563V210.083H212.378V207.483C211.178 209.323 208.858 210.363 205.658 210.363C200.778 210.363 197.698 207.683 197.698 203.963C197.698 200.403 200.098 197.603 206.578 197.603H212.098V197.283C212.098 194.363 210.338 192.643 206.778 192.643C204.378 192.643 201.898 193.443 200.298 194.763L198.338 191.123C200.618 189.363 203.938 188.483 207.378 188.483ZM206.698 206.723C209.138 206.723 211.258 205.603 212.098 203.403V200.923H206.938C203.538 200.923 202.618 202.203 202.618 203.763C202.618 205.563 204.138 206.723 206.698 206.723ZM226.034 185.203C224.194 185.203 222.834 183.883 222.834 182.203C222.834 180.523 224.194 179.203 226.034 179.203C227.874 179.203 229.234 180.443 229.234 182.083C229.234 183.843 227.914 185.203 226.034 185.203ZM223.514 210.083V188.723H228.514V210.083H223.514ZM239.837 191.843C241.277 189.603 243.877 188.483 247.437 188.483V193.243C246.997 193.163 246.637 193.123 246.277 193.123C242.477 193.123 240.077 195.363 240.077 199.723V210.083H235.077V188.723H239.837V191.843Z" fill="#F7F3E8"/>
+        <path d="M52.22 248.283C50.04 248.283 47.86 247.603 46.7 246.603L47.6 244.583C48.72 245.483 50.5 246.123 52.22 246.123C54.4 246.123 55.32 245.343 55.32 244.303C55.32 241.283 47 243.263 47 238.063C47 235.803 48.8 233.883 52.64 233.883C54.32 233.883 56.08 234.323 57.3 235.123L56.48 237.143C55.22 236.403 53.84 236.043 52.62 236.043C50.46 236.043 49.58 236.883 49.58 237.943C49.58 240.923 57.88 238.983 57.88 244.123C57.88 246.363 56.06 248.283 52.22 248.283ZM71.0581 245.903H78.9581V248.083H68.4581V234.083H78.6781V236.263H71.0581V239.903H77.8181V242.043H71.0581V245.903ZM101.817 248.083H99.0166L96.1566 243.983C95.9766 244.003 95.7966 244.003 95.6166 244.003H92.4566V248.083H89.8566V234.083H95.6166C99.2966 234.083 101.577 235.963 101.577 239.063C101.577 241.183 100.497 242.743 98.5966 243.483L101.817 248.083ZM98.9566 239.063C98.9566 237.303 97.7766 236.283 95.4966 236.283H92.4566V241.863H95.4966C97.7766 241.863 98.9566 240.823 98.9566 239.063ZM122.685 234.083H125.285L119.185 248.083H116.625L110.505 234.083H113.325L117.985 244.883L122.685 234.083ZM134.763 248.083V234.083H137.363V248.083H134.763ZM155.63 248.283C151.35 248.283 148.15 245.263 148.15 241.083C148.15 236.903 151.35 233.883 155.65 233.883C157.93 233.883 159.89 234.703 161.19 236.223L159.51 237.803C158.49 236.703 157.23 236.163 155.77 236.163C152.87 236.163 150.77 238.203 150.77 241.083C150.77 243.963 152.87 246.003 155.77 246.003C157.23 246.003 158.49 245.463 159.51 244.343L161.19 245.943C159.89 247.463 157.93 248.283 155.63 248.283ZM174.281 245.903H182.181V248.083H171.681V234.083H181.901V236.263H174.281V239.903H181.041V242.043H174.281V245.903ZM197.419 248.283C195.239 248.283 193.059 247.603 191.899 246.603L192.799 244.583C193.919 245.483 195.699 246.123 197.419 246.123C199.599 246.123 200.519 245.343 200.519 244.303C200.519 241.283 192.199 243.263 192.199 238.063C192.199 235.803 193.999 233.883 197.839 233.883C199.519 233.883 201.279 234.323 202.499 235.123L201.679 237.143C200.419 236.403 199.039 236.043 197.819 236.043C195.659 236.043 194.779 236.883 194.779 237.943C194.779 240.923 203.079 238.983 203.079 244.123C203.079 246.363 201.259 248.283 197.419 248.283Z" fill="#F7F3E8"/>
+        <path d="M124.583 5.5V15.6167M84.1167 56.0833H74M95.8222 27.3222L88.6687 20.1687M153.343 27.3222L160.496 20.1687M175.167 56.0833H165.05M99.2917 56.0833C99.2917 42.1151 110.615 30.7917 124.583 30.7917C138.552 30.7917 149.875 42.1151 149.875 56.0833" stroke="#F5A623" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M125.076 48.0957C126.202 48.1464 127.167 48.3374 127.921 48.5283L128.279 48.623V48.624C130.433 49.2141 132.094 50.3383 132.96 50.9463C133.923 51.6223 135.039 52.5036 136.119 53.3525C139.844 56.2809 143.808 58.2709 149.245 59.4199C152.278 60.0609 154.94 60.6198 157.024 61.1797C158.951 61.697 161.599 62.5057 163.919 64.1699C165.191 65.0823 166.537 66.2117 167.768 67.749C168.997 69.2845 169.808 70.8493 170.425 72.293H170.426C171.466 74.7261 171.757 77.133 171.882 79.0674C172.005 80.9757 172 83.2811 172 85.7285V103.962C172 119.36 163.774 131.845 155.527 140.575C147.176 149.416 137.696 155.598 132.725 158.546C131.953 159.003 130.078 160.217 127.545 160.769C125.618 161.188 123.382 161.188 121.455 160.769H121.454C118.921 160.216 117.046 159.003 116.274 158.546C111.303 155.598 101.823 149.416 93.4717 140.575C85.2248 131.845 77 119.36 77 103.962V85.7285C77 83.2811 76.9952 80.9757 77.1182 79.0674C77.2428 77.1331 77.5353 74.7262 78.5752 72.293L78.8154 71.7471C79.4002 70.4603 80.1552 69.0936 81.2314 67.749C82.4622 66.2116 83.8086 65.0822 85.0801 64.1699C87.3995 62.5058 90.0484 61.6971 91.9746 61.1797C94.0591 60.6198 96.7208 60.0609 99.7539 59.4199C105.191 58.2709 109.155 56.281 112.88 53.3525C113.96 52.5035 115.076 51.6224 116.039 50.9463C116.905 50.3382 118.566 49.2141 120.72 48.624L120.763 48.6123L121.026 48.542L121.076 48.5293C121.962 48.305 123.125 48.083 124.5 48.083L125.076 48.0957ZM124.499 69.0684C118.585 73.645 112.004 76.8541 103.745 78.5996C100.49 79.2876 98.4402 79.7247 96.9824 80.1162V80.1152C96.8113 80.1612 96.6608 80.203 96.5293 80.2412C96.5271 80.272 96.5236 80.3039 96.5215 80.3369C96.449 81.4615 96.4443 83.0191 96.4443 85.7285V103.962C96.4443 112.12 100.864 119.979 107.555 127.062C113.368 133.217 120.093 137.918 124.499 140.661C128.905 137.918 135.631 133.217 141.444 127.062C148.135 119.979 152.556 112.12 152.556 103.962V85.7285C152.556 83.0191 152.55 81.4615 152.478 80.3369C152.475 80.3038 152.471 80.2721 152.469 80.2412C152.338 80.2031 152.187 80.1611 152.017 80.1152V80.1162C150.559 79.7247 148.51 79.2875 145.255 78.5996C136.995 76.854 130.413 73.6455 124.499 69.0684Z" fill="#F7F3E8"/>
+      </svg>
+    </a>
+    <nav class="links" id="navlinks">
+      <a href="#what">What we do</a>
+      <a href="#how">How it works</a>
+      <a href="#plans">Coverage</a>
+      <a href="#areas">Service areas</a>
+    </nav>
+    <button class="btn btn-gold hd-cta" data-cbot>Get covered</button>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-photo">
+    <img src="https://images.unsplash.com/photo-1655300283246-1ef0317a565d?fm=jpg&q=70&w=2400&auto=format&fit=crop" alt="A Florida home with rooftop solar panels in midday sun">
+  </div>
+  <div class="hero-scrim"></div>
+  <div class="hero-arc"></div>
+  <div class="wrap hero-inner">
+    <div class="shield reveal in" data-mark style="--s:96px"></div>
+    <p class="eyebrow reveal in" data-d="1">Your personal solar guardian.</p>
+    <h1 class="reveal in" data-d="2">Your solar investment, <em>protected for good.</em></h1>
+    <p class="sub reveal in" data-d="3">When your installer left, your protection left with them. We put your system back under steady, ongoing care — monitored, maintained, and guaranteed — so you're never left stranded again.</p>
+    <div class="hero-cta reveal in" data-d="4">
+      <button class="btn btn-gold" data-cbot>Get covered</button>
+      <a href="#how" class="link-quiet">See how protection works <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="trust-strip reveal in" data-d="4">
+      <span>Licensed FL solar contractor</span><span class="dot"></span>
+      <span>Insured &amp; bonded</span><span class="dot"></span>
+      <span>Coverage you can count on</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1 PROBLEM ============ -->
+<section class="band problem">
+  <div class="wrap">
+    <div class="icon-ring reveal"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="1.6"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z" stroke-linejoin="round"/><path d="M9.5 12.5 11 14l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="20" stroke-dashoffset="20" opacity=".5"/><path d="M12 8v4M12 15.5v.01" stroke-linecap="round"/></svg></div>
+    <h2 class="title reveal">An unprotected system is an exposed investment.</h2>
+    <p class="lead reveal" data-d="1">You invested in solar to gain control and security. When the installer behind it disappears, that security goes too — no monitoring, no maintenance, no one accountable for the warranty. We exist to put a guardian back in place: a partner whose job is to protect what you've built.</p>
+  </div>
+</section>
+
+<!-- ============ 2 WHAT WE DO ============ -->
+<section class="band" id="what">
+  <div class="wrap center">
+    <p class="eyebrow kicker reveal">What we do</p>
+    <h2 class="title reveal" data-d="1">We watch over your whole system.</h2>
+  </div>
+  <div class="wrap">
+    <div class="cards">
+      <div class="card reveal" data-d="1">
+        <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" stroke-linejoin="round"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Always-on monitoring</h3><p>We keep watch so you don't have to.</p>
+      </div>
+      <div class="card reveal" data-d="2">
+        <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m14.7 6.3 3 3M3 21l4-1 11-11a2.8 2.8 0 0 0-4-4L3 16l-1 4Z" stroke-linejoin="round"/></svg></div>
+        <h3>Maintenance &amp; repair</h3><p>Everything kept in top condition, issues handled before they grow.</p>
+      </div>
+      <div class="card reveal" data-d="3">
+        <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2 4 5v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V5l-8-3Z" stroke-linejoin="round"/><path d="M9 11.5 11 13.5l4-4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Warranty protection</h3><p>Coverage restored where your installer left a gap.</p>
+      </div>
+      <div class="card reveal" data-d="4">
+        <div class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6" stroke-linecap="round"/></svg></div>
+        <h3>A single point of accountability</h3><p>One trusted partner, responsible for it all.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 HOW IT WORKS ============ -->
+<section class="band" id="how" style="background:var(--deeper)">
+  <div class="wrap center">
+    <p class="eyebrow kicker reveal">How it works</p>
+    <h2 class="title reveal" data-d="1">Protection, made simple.</h2>
+  </div>
+  <div class="wrap">
+    <div class="steps">
+      <div class="stepline"></div>
+      <div class="step reveal" data-d="1"><div class="num">1</div><h3>We review your system.</h3><p>A complete assessment of where things stand.</p></div>
+      <div class="step reveal" data-d="2"><div class="num">2</div><h3>We put cover in place.</h3><p>A protection plan matched to your system and home.</p></div>
+      <div class="step reveal" data-d="3"><div class="num">3</div><h3>We maintain it.</h3><p>Proactive care and rapid response, handled for you.</p></div>
+      <div class="step reveal" data-d="4"><div class="num">4</div><h3>We stay.</h3><p>Your guardian, year after year.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 WHY US ============ -->
+<section class="band why">
+  <div class="wrap why-grid">
+    <div class="reveal">
+      <p class="eyebrow kicker">Why us</p>
+      <h2 class="title">Steadfast, by design.</h2>
+      <p class="lead">A licensed Florida solar contractor <b style="color:var(--cream)">[License&nbsp;#&nbsp;CVC57231]</b>, fully insured and bonded, serving Tampa Bay, Sarasota, Orlando, Fort&nbsp;Myers &amp; Naples. We built this company to be permanent — financially sound, properly credentialed, and accountable. The kind of partner you can hand your investment to and stop worrying about.</p>
+      <div class="why-seals">
+        <span class="seal"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Licensed</span>
+        <span class="seal"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Insured</span>
+        <span class="seal"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Bonded</span>
+        <span class="seal"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>94% renewal rate</span>
+      </div>
+    </div>
+    <div class="reveal" data-d="2">
+      <div class="shield" data-mark style="--s:200px;margin:0 auto;display:block;width:max-content"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 PROOF ============ -->
+<section class="band proof">
+  <div class="wrap">
+    <p class="eyebrow kicker reveal">Proof</p>
+    <h2 class="title reveal" data-d="1">Trusted to protect what matters.</h2>
+    <div class="stats">
+      <div class="stat reveal" data-d="1"><div class="big" data-count="1200" data-suffix="+">0</div><div class="lbl">homes under active protection</div></div>
+      <div class="stat reveal" data-d="2"><div class="big" data-count="94" data-suffix="%">0</div><div class="lbl">of plan members renew each year</div></div>
+      <div class="stat reveal" data-d="3"><div class="big" data-count="4" data-suffix="-hr">0</div><div class="lbl">priority response for members</div></div>
+    </div>
+    <div class="quote reveal" data-d="2">
+      <p>"We spent two years just hoping nothing would break after our installer vanished. Now someone is actually watching our system for us — and they pick up the phone. That peace of mind is worth every cent."</p>
+      <cite>— Linda M., Sarasota</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 PLANS ============ -->
+<section class="band plans-wrap" id="plans">
+  <div class="wrap center">
+    <p class="eyebrow kicker reveal">Coverage plans</p>
+    <h2 class="title reveal" data-d="1">Choose your level of protection.</h2>
+    <p class="lead reveal" data-d="2">Our coverage plans put your system under continuous guard — monitoring, maintenance, priority response, and warranty protection. Three tiers, one promise: you're covered. Plans from $19/mo.</p>
+  </div>
+  <div class="wrap">
+    <div class="plans">
+      <div class="plan reveal" data-d="1">
+        <div class="pname">Watch</div>
+        <div class="price"><b>$19</b>per month</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Always-on monitoring</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Annual health check</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Fault alerts</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Member support line</li>
+        </ul>
+        <button class="btn btn-out" data-cbot>Compare plans</button>
+      </div>
+      <div class="plan pop reveal" data-d="2">
+        <div class="tag">Most popular</div>
+        <div class="pname">Guard</div>
+        <div class="price"><b>$39</b>per month</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Watch</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Scheduled maintenance</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Workmanship warranty protection</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>24-hour priority response</li>
+        </ul>
+        <button class="btn btn-gold" data-cbot>Compare plans</button>
+      </div>
+      <div class="plan reveal" data-d="3">
+        <div class="pname">Fortress</div>
+        <div class="price"><b>$69</b>per month</div>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Guard</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>4-hour priority response</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Full parts coverage</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Storm prep &amp; annual optimization</li>
+        </ul>
+        <button class="btn btn-out" data-cbot>Compare plans</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 SERVICE AREAS ============ -->
+<section class="band areas" id="areas">
+  <div class="wrap">
+    <p class="eyebrow kicker reveal">Service areas</p>
+    <h2 class="title reveal" data-d="1">Across Central &amp; Southwest Florida.</h2>
+    <div class="chips reveal" data-d="2">
+      <span class="chip">Tampa Bay</span><span class="chip">St. Petersburg</span><span class="chip">Clearwater</span>
+      <span class="chip">Sarasota–Bradenton</span><span class="chip">Orlando</span><span class="chip">Lakeland</span>
+      <span class="chip">Fort Myers</span><span class="chip">Naples</span><span class="chip">Cape Coral</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 FINAL CTA ============ -->
+<section class="final">
+  <div class="wrap">
+    <div class="shield reveal" data-mark style="--s:80px;margin:0 auto 1.5rem;display:block;width:max-content"></div>
+    <h2 class="reveal" data-d="1">We've got your system covered — and we're not going anywhere.</h2>
+    <p class="reveal" data-d="2">Put a guardian back in place today.</p>
+    <button class="btn btn-gold reveal" data-d="3" data-cbot>Get covered</button>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo"><svg viewBox="0 0 249 254" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M124.583 5.5V15.6167M84.1167 56.0833H74M95.8222 27.3222L88.6687 20.1687M153.343 27.3222L160.496 20.1687M175.167 56.0833H165.05M99.2917 56.0833C99.2917 42.1151 110.615 30.7917 124.583 30.7917C138.552 30.7917 149.875 42.1151 149.875 56.0833" stroke="#F5A623" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M125.076 48.0957C126.202 48.1464 127.167 48.3374 127.921 48.5283L128.279 48.623V48.624C130.433 49.2141 132.094 50.3383 132.96 50.9463C133.923 51.6223 135.039 52.5036 136.119 53.3525C139.844 56.2809 143.808 58.2709 149.245 59.4199C152.278 60.0609 154.94 60.6198 157.024 61.1797C158.951 61.697 161.599 62.5057 163.919 64.1699C165.191 65.0823 166.537 66.2117 167.768 67.749C168.997 69.2845 169.808 70.8493 170.425 72.293H170.426C171.466 74.7261 171.757 77.133 171.882 79.0674C172.005 80.9757 172 83.2811 172 85.7285V103.962C172 119.36 163.774 131.845 155.527 140.575C147.176 149.416 137.696 155.598 132.725 158.546C131.953 159.003 130.078 160.217 127.545 160.769C125.618 161.188 123.382 161.188 121.455 160.769H121.454C118.921 160.216 117.046 159.003 116.274 158.546C111.303 155.598 101.823 149.416 93.4717 140.575C85.2248 131.845 77 119.36 77 103.962V85.7285C77 83.2811 76.9952 80.9757 77.1182 79.0674C77.2428 77.1331 77.5353 74.7262 78.5752 72.293L78.8154 71.7471C79.4002 70.4603 80.1552 69.0936 81.2314 67.749C82.4622 66.2116 83.8086 65.0822 85.0801 64.1699C87.3995 62.5058 90.0484 61.6971 91.9746 61.1797C94.0591 60.6198 96.7208 60.0609 99.7539 59.4199C105.191 58.2709 109.155 56.281 112.88 53.3525C113.96 52.5035 115.076 51.6224 116.039 50.9463C116.905 50.3382 118.566 49.2141 120.72 48.624L120.763 48.6123L121.026 48.542L121.076 48.5293C121.962 48.305 123.125 48.083 124.5 48.083L125.076 48.0957Z" fill="#F7F3E8" stroke="#08233F" stroke-width="10"/></svg></div>
+        <p class="trust">Licensed Florida solar contractor · License&nbsp;# CVC57231<br>Fully insured &amp; bonded · <a href="https://www.myfloridalicense.com" target="_blank" rel="noopener">Verify on DBPR</a></p>
+      </div>
+      <div class="fcol">
+        <h4>Company</h4>
+        <a href="#what">What we do</a><a href="#how">How it works</a><a href="#plans">Coverage plans</a><a href="#areas">Service areas</a>
+      </div>
+      <div class="fcol">
+        <h4>Service areas</h4>
+        <a href="#areas">Tampa Bay</a><a href="#areas">Sarasota–Bradenton</a><a href="#areas">Orlando</a><a href="#areas">Fort Myers &amp; Naples</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Solar Repair Services. All rights reserved. · <a href="#">Privacy</a> · <a href="#">Terms</a></span>
+      <span class="investor">Investor &amp; partner inquiries → <a href="#" data-cbot>private contact</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ CHATBOT ============ -->
+<button class="cbot-btn" id="cbotBtn" aria-label="Open coverage assistant">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V5l-8-3Z" stroke-linejoin="round"/><path d="M9 11l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+<div class="cbot-panel" id="cbotPanel" role="dialog" aria-label="Coverage assistant">
+  <div class="cbot-head">
+    <div class="ava"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V5l-8-3Z" stroke-linejoin="round"/></svg></div>
+    <div><b>Your Solar Guardian</b><span>Typically replies in minutes</span></div>
+  </div>
+  <div class="cbot-body" id="cbotBody">
+    <div class="bubble">Welcome. I can help you protect your solar system — tell me a little about your setup and I'll find the right level of coverage for you.</div>
+    <form class="cbot-form" id="cbotForm">
+      <input required name="name" placeholder="Your name">
+      <input required name="address" placeholder="Property address">
+      <input required name="contact" placeholder="Phone or email">
+      <input name="installer" placeholder="Original installer (if known)">
+      <textarea name="system" rows="2" placeholder="System details — size, age, what's happening"></textarea>
+      <button type="submit" class="btn btn-gold">Get covered</button>
+    </form>
+    <div class="cbot-ok hidden" id="cbotOk">
+      <div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <b style="font-family:Fraunces;font-size:1.2rem;color:var(--cream)">You're in safe hands.</b>
+      <p style="color:var(--blue);margin-top:.5rem;font-size:.92rem">A guardian from our team will reach out shortly to set up your free assessment.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- inject shield mark + sparkle into every [data-mark] ----
+const MARK = `
+<span class="glow"></span>
+<svg viewBox="62 -6 125 175" xmlns="http://www.w3.org/2000/svg" style="height:var(--s,90px);width:auto" aria-hidden="true">
+<path d="M124.583 5.5V15.6167M84.1167 56.0833H74M95.8222 27.3222L88.6687 20.1687M153.343 27.3222L160.496 20.1687M175.167 56.0833H165.05M99.2917 56.0833C99.2917 42.1151 110.615 30.7917 124.583 30.7917C138.552 30.7917 149.875 42.1151 149.875 56.0833" stroke="#F5A623" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M125.076 48.0957C126.202 48.1464 127.167 48.3374 127.921 48.5283L128.279 48.623V48.624C130.433 49.2141 132.094 50.3383 132.96 50.9463C133.923 51.6223 135.039 52.5036 136.119 53.3525C139.844 56.2809 143.808 58.2709 149.245 59.4199C152.278 60.0609 154.94 60.6198 157.024 61.1797C158.951 61.697 161.599 62.5057 163.919 64.1699C165.191 65.0823 166.537 66.2117 167.768 67.749C168.997 69.2845 169.808 70.8493 170.425 72.293H170.426C171.466 74.7261 171.757 77.133 171.882 79.0674C172.005 80.9757 172 83.2811 172 85.7285V103.962C172 119.36 163.774 131.845 155.527 140.575C147.176 149.416 137.696 155.598 132.725 158.546C131.953 159.003 130.078 160.217 127.545 160.769C125.618 161.188 123.382 161.188 121.455 160.769H121.454C118.921 160.216 117.046 159.003 116.274 158.546C111.303 155.598 101.823 149.416 93.4717 140.575C85.2248 131.845 77 119.36 77 103.962V85.7285C77 83.2811 76.9952 80.9757 77.1182 79.0674C77.2428 77.1331 77.5353 74.7262 78.5752 72.293L78.8154 71.7471C79.4002 70.4603 80.1552 69.0936 81.2314 67.749C82.4622 66.2116 83.8086 65.0822 85.0801 64.1699C87.3995 62.5058 90.0484 61.6971 91.9746 61.1797C94.0591 60.6198 96.7208 60.0609 99.7539 59.4199C105.191 58.2709 109.155 56.281 112.88 53.3525C113.96 52.5035 115.076 51.6224 116.039 50.9463C116.905 50.3382 118.566 49.2141 120.72 48.624L121.076 48.5293C121.962 48.305 123.125 48.083 124.5 48.083L125.076 48.0957ZM124.499 69.0684C118.585 73.645 112.004 76.8541 103.745 78.5996C100.49 79.2876 98.4402 79.7247 96.9824 80.1162C96.8113 80.1612 96.6608 80.203 96.5293 80.2412C96.5271 80.272 96.5236 80.3039 96.5215 80.3369C96.449 81.4615 96.4443 83.0191 96.4443 85.7285V103.962C96.4443 112.12 100.864 119.979 107.555 127.062C113.368 133.217 120.093 137.918 124.499 140.661C128.905 137.918 135.631 133.217 141.444 127.062C148.135 119.979 152.556 112.12 152.556 103.962V85.7285C152.556 83.0191 152.55 81.4615 152.478 80.3369C152.475 80.3038 152.471 80.2721 152.469 80.2412C152.338 80.2031 152.187 80.1611 152.017 80.1152C150.559 79.7247 148.51 79.2875 145.255 78.5996C136.995 76.854 130.413 73.6455 124.499 69.0684Z" fill="#F7F3E8"/>
+</svg>
+<span class="glint"></span>
+<span class="spark s1">`+star()+`</span><span class="spark s2">`+star(.7)+`</span><span class="spark s3">`+star(.6)+`</span><span class="spark s4">`+star(.5)+`</span><span class="spark s5">`+star(.45)+`</span>`;
+function star(sc){sc=sc||1;const s=Math.round(18*sc);return `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c1 6 5 10 11 12-6 2-10 6-11 12-1-6-5-10-11-12C7 10 11 6 12 0Z"/></svg>`;}
+document.querySelectorAll('[data-mark]').forEach(el=>{el.innerHTML=MARK;});
+
+// ---- header scroll ----
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>20));
+
+// ---- burger ----
+document.getElementById('burger').addEventListener('click',()=>document.getElementById('navlinks').classList.toggle('show'));
+document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('show')));
+
+// ---- reveal on scroll ----
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.18});
+document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+// ---- counters ----
+const cio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){animate(e.target);cio.unobserve(e.target);}})},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+function animate(el){const t=+el.dataset.count,suf=el.dataset.suffix||'';let s=null;const d=1400;
+  function step(ts){if(!s)s=ts;const p=Math.min((ts-s)/d,1);const v=Math.floor((1-Math.pow(1-p,3))*t);el.textContent=v.toLocaleString()+suf;if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);}
+
+// ---- chatbot ----
+const cbotBtn=document.getElementById('cbotBtn'),cbotPanel=document.getElementById('cbotPanel');
+function openCbot(){cbotPanel.classList.add('open');}
+cbotBtn.addEventListener('click',()=>cbotPanel.classList.toggle('open'));
+document.querySelectorAll('[data-cbot]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openCbot();}));
+document.getElementById('cbotForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  // analytics event (doubles as investor traction metric) + CRM/inbox handoff
+  window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'lead_submitted',concept:'guardian',variant:'heritage'});
+  console.log('LEAD → CRM/inbox',Object.fromEntries(new FormData(e.target)));
+  document.getElementById('cbotForm').classList.add('hidden');
+  document.getElementById('cbotOk').classList.remove('hidden');
+});
+</script>
+</body>
+</html>
